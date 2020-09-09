@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="buttons">
+                <button id="rock">Rock</button>
+                <button id="paper">Paper</button>
+                <button id="scissors">Scissors</button>
+            </div>
+            
+            <div id="text">
+                <p id="results"></p>
+                <p id="resultsp"></p>
+            </div>
+        </div>
+        
+        <script>
+            const rock = document.getElementById('rock');
+            rock.addEventListener('click', function(){
+                playRound('rock', computerPlay());
+            })
+            const paper = document.getElementById('paper');
+            paper.addEventListener('click', function(){
+                playRound('paper', computerPlay());
+            })
+            const scissors = document.getElementById('scissors');
+            scissors.addEventListener('click', function(){
+                playRound('scissors', computerPlay());
+            })
+
+            const results = document.getElementById('results');
+            const resultsp = document.getElementById('resultsp');
+
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) ) + min;
+            }
+            function computerPlay(){
+                let play = '';
+                let ranNum = getRndInteger(1,3);
+                if (ranNum === 1){
+                    play = 'rock';
+                }
+                if (ranNum === 2){
+                    play = 'paper';
+                }
+                if (ranNum === 3){
+                    play = 'scissors';
+                }
+                return play;
+            }
+            function playRound(player, computer){
+                results.textContent = `You played ${player} and the computer played ${computer}`;
+                console.log(`You played ${player} and the computer played ${computer}`);
+                if (player == 'rock' && computer == 'scissors'){
+                    resultsp.textContent = 'You won.';
+                    console.log('You won.');
+                    return;
+                }
+                if (player == 'rock' && computer == 'paper'){
+                    resultsp.textContent = 'You lose.';
+                    console.log('You lose.');
+                    return;
+                }
+                if (player == 'paper' && computer == 'rock'){
+                    resultsp.textContent = 'You won.';
+                    console.log('You won.');
+                    return;
+                }
+                if (player == 'paper' && computer == 'scissors'){
+                    resultsp.textContent = 'You lose.';
+                    console.log('You lose.');
+                    return;
+                }
+                if (player == 'scissors' && computer == 'paper'){
+                    resultsp.textContent = 'You won.';
+                    console.log('You won.');
+                    return;
+                }
+                if (player == 'scissors' && computer == 'rock'){
+                    resultsp.textContent = 'You lose.';
+                    console.log('You lose.');
+                    return;
+                }
+                else{
+                    resultsp.textContent = 'Tie.';
+                    console.log('Tie.');
+                }
+            }
+            function game(){
+                for (let i = 0; i < 5; i++) {
+                    playRound();
+                }
+            }
+        </script>
+    </body>
+</html>
